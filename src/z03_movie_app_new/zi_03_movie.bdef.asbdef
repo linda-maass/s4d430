@@ -1,0 +1,61 @@
+managed implementation in class zbp_03_movie unique;
+strict ( 2 );
+
+/* Root Entitiy Movie */
+define behavior for ZI_03_MOVIE alias Movie
+persistent table zabap_movie_a
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Ratings { create; }
+
+  validation ValidateGenre on save { create; }
+  action RateMovie parameter ZA_03_Rating;
+
+  field ( readonly, numbering : managed ) MovieUuid;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, AverageRating;
+  field ( mandatory : create ) Title, Genre, PublishingYear, RuntimeInMin;
+  field ( readonly : update ) Title, Genre, PublishingYear, RuntimeInMin;
+
+  mapping for zabap_movie_a corresponding
+    {
+      CreatedAt      = created_at;
+      CreatedBy      = created_by;
+      ImageUrl       = image_url;
+      LastChangedAt  = last_changed_at;
+      LastChangedBy  = last_changed_by;
+      MovieUuid      = movie_uuid;
+      PublishingYear = publishing_year;
+      RuntimeInMIn   = runtime_in_min;
+    }
+
+}
+
+/* Child Entity Rating */
+define behavior for ZI_03_RATING alias Rating
+persistent table zabap_rating_a
+lock dependent by _Movie
+authorization dependent by _Movie
+//etag master <field_name>
+{
+  update;
+  delete;
+  association _Movie;
+
+
+  field ( readonly, numbering : managed ) RatingUuid;
+  field ( readonly ) MovieUuid;
+
+  mapping for zabap_rating_a corresponding
+    {
+      MovieUuid  = movie_uuid;
+      RatingDate = rating_date;
+      RatingUuid = rating_uuid;
+      UserName   = user_name;
+    }
+
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Movie'
+define service ZUI_03_MOVIE {
+  expose ZC_03_Movie  as Movie;
+  expose ZC_03_RATING as Rating;
+}
