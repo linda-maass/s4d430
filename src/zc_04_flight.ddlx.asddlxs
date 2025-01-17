@@ -1,0 +1,66 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo:
+{
+  typeName: 'Flight',
+  typeNamePlural: 'FLights',
+  title.value: 'CarrierId',
+  description.value: 'ConnectionId'
+
+}
+
+// @UI.presentationVariant: [{
+// sortOrder: [{
+// by: 'AverageRating',
+// direction: #DESC
+// }]
+
+
+annotate entity ZC_04_FLIGHT with
+{
+
+  /* Facets */
+  @UI.facet:
+  [
+    { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Flight Details', targetQualifier: 'Details' },
+    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'Admin' },
+    { position: 30, type: #LINEITEM_REFERENCE, label: 'Bookings', targetElement: '_Bookings'}
+  ]
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 10, qualifier: 'Details' }]
+  CarrierId;
+
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 20, qualifier: 'Details' }]
+  ConnectionId;
+
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 30, qualifier: 'Details' }]
+  FlightDate;
+
+  @UI.lineItem: [{ position: 40, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 40, qualifier: 'Details' }]
+  Price;
+
+  @UI.lineItem: [{ position: 45, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 50, qualifier: 'Admin' }]
+  CurrencyCode;
+
+  @UI. fieldGroup: [{ position: 60, qualifier: 'Admin' }]
+  PlaneTypeId;
+
+  @UI. fieldGroup: [{ position: 70, qualifier: 'Details' }]
+  SeatsMax;
+
+  @UI. fieldGroup: [{ position: 80, qualifier: 'Details' }]
+  SeatsOccupied;
+
+
+
+  @UI.lineItem: [{ position: 50, importance: #HIGH }]
+  @UI. fieldGroup: [{ position: 90, qualifier: 'Details' }]
+  SeatUtilization;
+  
+  
+
+}

@@ -1,0 +1,23 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_04_FLIGHT //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Bookings { create; }
+}
+
+define behavior for ZC_04_BOOKING alias Booking
+{
+
+use update;
+use delete;
+
+use association _Flight;
+
+use action CancelBooking;
+
+}

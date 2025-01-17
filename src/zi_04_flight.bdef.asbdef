@@ -1,0 +1,58 @@
+managed implementation in class zbp_i_04_flight unique;
+strict ( 2 );
+
+define behavior for ZI_04_FLIGHT alias Flight
+persistent table /dmo/flight
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Bookings { create; }
+
+  mapping for /dmo/flight corresponding
+    {
+      CarrierId     = carrier_id;
+      ConnectionID  = connection_id;
+      CurrencyCode  = currency_code;
+      FlightDate    = flight_date;
+      PlaneTypeId   = plane_type_id;
+      SeatsMax      = seats_max;
+      SeatsOccupied = seats_occupied;
+    }
+
+}
+
+define behavior for ZI_04_BOOKING alias Booking
+persistent table /dmo/booking_m
+lock dependent by _Flight
+authorization dependent by _Flight
+//etag master <field_name>
+{
+
+
+  update;
+  delete;
+
+  association _Flight;
+  field ( readonly ) BookingId, CarrierId, ConnectionId, FlightDate, TravelId;
+
+  action CancelBooking result [1] $self;
+
+  mapping for /dmo/booking_m corresponding
+    {
+      BookingDate  = booking_date;
+      BookingId    = booking_id;
+      CarrierId    = carrier_id;
+      ConnectionId = connection_id;
+      CurrencyCode = currency_code;
+      CustomerId   = customer_id;
+      FlightDate   = flight_date;
+      FlightPrice  = flight_price;
+      TravelId     = travel_id;
+      BookingStatus = booking_status;
+      LastChangedAt = last_changed_at;
+    }
+}

@@ -1,0 +1,72 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo:
+{
+typeName: 'Booking',
+typeNamePlural: 'Bookings',
+title.value: 'TravelID',
+description.value: 'BookingID'
+
+
+}
+
+
+annotate entity ZC_04_BOOKING with
+{
+
+  
+  @UI.facet: [{ position: 10, type: #IDENTIFICATION_REFERENCE, label: 'Rating Information' }]
+ 
+ /* Actions */
+  @UI.lineItem:
+  [
+    { position: 10, dataAction: 'CancelBooking', label: 'Cancel Booking', type: #FOR_ACTION }
+  ]
+ 
+   @UI.identification: [{ position: 9 }]
+  TravelId;
+
+  @UI.identification: [{ position: 10 }]
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  BookingId;
+
+  @UI.identification: [{ position: 20 }]
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  BookingDate;
+
+  @UI.identification: [{ position: 30 }]
+  @UI.lineItem: [{ position: 40, importance: #HIGH }]
+  CustomerId;
+
+  @UI.identification: [{ position: 40 }]
+  CarrierId;
+
+  @UI.identification: [{ position: 50 }]
+  ConnectionId;
+
+  @UI.identification: [{ position: 60 }]
+  FlightDate;
+
+  @UI.identification: [{ position: 70 }]
+  @UI.lineItem: [{ position: 50, importance: #HIGH }]
+  FlightPrice;
+
+  @UI.identification: [{ position: 80 }]
+  @UI.lineItem: [{ position: 60, importance: #HIGH }]
+  CurrencyCode;
+
+
+@UI.identification: [{ position: 90 }]
+  @UI.lineItem: [{ position: 70, importance: #HIGH }]
+  BookingStatus;
+  
+  @UI.identification: [{ position: 100 }]
+  @UI.lineItem: [{ position: 80, importance: #HIGH }]
+  LastChangedAt;
+
+
+
+
+
+
+}
